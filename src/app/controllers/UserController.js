@@ -21,6 +21,10 @@ class UserController {
 
     return res.json(users);
   }
+
+  async update(req, res) {
+    return res.json({ status: 'Received' });
+  }
 }
 
 export default new UserController();

@@ -9,6 +9,7 @@ class SessionController {
     const user = await User.findOne({
       where: { email },
     });
+
     if (!user) return res.status(401).json({ error: 'User not found' });
 
     const passwordMatched = await user.checkPassword(password);
@@ -17,6 +18,12 @@ class SessionController {
 
     const { id, name } = user;
 
+    /**
+     * The jwt.sign needs
+     * an id to link with the token that will be generated
+     * secret that is the key secret of my app. (go to md5.org to create one)
+     * and an object to tell how long it will be valid (@expiresIn)
+     */
     return res.json({
       user: {
         id,
